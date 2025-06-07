@@ -1,0 +1,13 @@
+{
+  "files": [],
+  "references": [
+    { "path": "./tsconfig.app.json" },
+    { "path": "./tsconfig.node.json" }
+  ],
+  "compilerOptions": {
+    "jsx": "react-jsx",        // yoki "react" eski versiyalar uchun
+    "lib": ["DOM", "ESNext"],  // DOM kutubxonasi kerak JSX uchun
+    "module": "ESNext",
+    "target": "ES6",
+  }
+}
