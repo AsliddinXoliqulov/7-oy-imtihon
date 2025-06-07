@@ -13,15 +13,14 @@ import {
   FaDownload,
   FaPaperPlane,
 } from "react-icons/fa";
+import SettingCard from "../components/SettingCard"; 
 
 export default function Settings() {
   const [darkMode, setDarkMode] = useState(false);
   const [language, setLanguage] = useState("uz");
 
-
-  
   return (
-    <div className="p-4 max-w-screen-xl mx-auto space-y-6 grid grid-cols-1 xl:grid-cols-2 gap-4">
+    <div className="p-4 max-w-screen-xl mx-auto grid grid-cols-1 xl:grid-cols-2 gap-4">
       <SettingCard icon={<FaGlobe className="text-blue-500" />} title="Til sozlamasi">
         <select
           value={language}
@@ -35,7 +34,13 @@ export default function Settings() {
       </SettingCard>
 
       <SettingCard
-        icon={darkMode ? <FaMoon className="text-purple-600" /> : <FaSun className="text-yellow-500" />}
+        icon={
+          darkMode ? (
+            <FaMoon className="text-purple-600" />
+          ) : (
+            <FaSun className="text-yellow-500" />
+          )
+        }
         title="Tungi rejim"
         onClick={() => setDarkMode(!darkMode)}
         clickable
@@ -62,15 +67,21 @@ export default function Settings() {
       </SettingCard>
 
       <SettingCard icon={<FaLink className="text-cyan-600" />} title="Xavfsiz ulanishlar">
-        <p className="text-sm text-gray-500 dark:text-gray-300">SSL, HTTPS va token sozlamalari</p>
+        <p className="text-sm text-gray-500 dark:text-gray-300">
+          SSL, HTTPS va token sozlamalari
+        </p>
       </SettingCard>
 
       <SettingCard icon={<FaLock className="text-amber-600" />} title="Parol boshqaruvi">
-        <p className="text-sm text-gray-500 dark:text-gray-300">Parollarni yangilash va sozlash</p>
+        <p className="text-sm text-gray-500 dark:text-gray-300">
+          Parollarni yangilash va sozlash
+        </p>
       </SettingCard>
 
       <SettingCard icon={<FaDatabase className="text-fuchsia-600" />} title="Ma'lumot zaxirasi">
-        <p className="text-sm text-gray-500 dark:text-gray-300">Zaxira qilish va tiklash sozlamalari</p>
+        <p className="text-sm text-gray-500 dark:text-gray-300">
+          Zaxira qilish va tiklash sozlamalari
+        </p>
       </SettingCard>
 
       <SettingCard icon={<FaPaperPlane className="text-teal-500" />} title="Fikr-mulohaza yuborish">
@@ -78,25 +89,10 @@ export default function Settings() {
       </SettingCard>
 
       <SettingCard icon={<FaDownload className="text-gray-700" />} title="Yuklab olishlar">
-        <p className="text-sm text-gray-500 dark:text-gray-300">Yuklangan fayllar boshqaruvi</p>
+        <p className="text-sm text-gray-500 dark:text-gray-300">
+          Yuklangan fayllar boshqaruvi
+        </p>
       </SettingCard>
-    </div>
-  );
-}
-
-function SettingCard({ icon, title, children, onClick, clickable = false }) {
-  return (
-    <div
-      onClick={onClick}
-      className={`bg-gray-100 rounded-xl shadow p-4 flex flex-col gap-2 transition hover:shadow-md ${
-        clickable ? "cursor-pointer hover:bg-gray-50" : ""
-      }`}
-    >
-      <div className="flex items-center gap-3">
-        {icon}
-        <p className="font-medium text-lg">{title}</p>
-      </div>
-      <div>{children}</div>
     </div>
   );
 }

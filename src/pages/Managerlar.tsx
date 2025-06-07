@@ -1,9 +1,22 @@
 import React, { useState, useEffect } from "react";
 
-const ManagersPage = () => {
-  const [managers, setManagers] = useState([]);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [loading, setLoading] = useState(false);
+interface Manager {
+  _id: string;
+  first_name: string;
+  last_name: string;
+  email: string;
+  role: string;
+  status: string;
+  work_date: string;
+  work_end?: string;
+  active: boolean;
+  image: string;
+}
+
+const ManagersPage: React.FC = () => {
+  const [managers, setManagers] = useState<Manager[]>([]);
+  const [searchTerm, setSearchTerm] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
     setLoading(true);
@@ -16,21 +29,21 @@ const ManagersPage = () => {
         Authorization: token ? `Bearer ${token}` : "",
       },
     })
-      .then(res => {
+      .then((res) => {
         if (!res.ok) throw new Error("Xatolik yuz berdi");
         return res.json();
       })
-      .then(data => {
+      .then((data) => {
         setManagers(data.data || []);
       })
-      .catch(err => {
+      .catch((err) => {
         console.error(err);
         setManagers([]);
       })
       .finally(() => setLoading(false));
   }, []);
 
-  const filteredManagers = managers.filter(manager =>
+  const filteredManagers = managers.filter((manager) =>
     (manager.first_name + " " + manager.last_name)
       .toLowerCase()
       .includes(searchTerm.toLowerCase())
@@ -43,7 +56,7 @@ const ManagersPage = () => {
         placeholder="Ism yoki familiya bo‘yicha qidirish..."
         className="mb-6 w-full max-w-md px-4 py-2 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-gray-100"
         value={searchTerm}
-        onChange={e => setSearchTerm(e.target.value)}
+        onChange={(e) => setSearchTerm(e.target.value)}
       />
 
       {loading ? (
@@ -66,12 +79,12 @@ const ManagersPage = () => {
             <tbody>
               {filteredManagers.length === 0 ? (
                 <tr>
-                  <td colSpan="8" className="p-4 text-center text-gray-500">
+                  <td colSpan={8} className="p-4 text-center text-gray-500">
                     Manager topilmadi
                   </td>
                 </tr>
               ) : (
-                filteredManagers.map(manager => (
+                filteredManagers.map((manager) => (
                   <tr
                     key={manager._id}
                     className="border-b hover:bg-gray-50 transition-colors"

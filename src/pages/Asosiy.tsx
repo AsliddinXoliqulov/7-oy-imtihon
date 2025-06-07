@@ -28,8 +28,8 @@ const payments = [
 ];
 
 export default function Payment() {
-  const [search, setSearch] = useState("");
-  const [openId, setOpenId] = useState(null);
+  const [search, setSearch] = useState<string>("");
+  const [openId, setOpenId] = useState<number | null>(null); 
 
   const filtered = payments.filter((item) =>
     item.name.toLowerCase().includes(search.toLowerCase())
@@ -37,7 +37,6 @@ export default function Payment() {
 
   return (
     <div className="space-y-6">
-      {/* Header and search */}
       <div className="flex items-center gap-4 flex-wrap bg-white">
         <h1 className="text-2xl font-bold flex items-center gap-2">
           <LuClock className="w-6 h-6" />

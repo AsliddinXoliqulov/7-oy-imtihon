@@ -8,7 +8,7 @@ import {
   FaSnowflake,
 } from "react-icons/fa";
 import { Button } from "antd";
-import Login from "./Login";
+// import Login from "./Login";
 
 interface Course {
   _id: string;
@@ -79,14 +79,6 @@ const Courses: React.FC = () => {
       setError("Kurslarni olishda xatolik yuz berdi");
     } finally {
       setLoading(false);
-    }
-  };
-
-  const handleLogin = (newToken: string) => {
-    const userData = localStorage.getItem("user");
-    if (userData) {
-      const user: User = JSON.parse(userData);
-      setToken(user.token);
     }
   };
 
@@ -168,8 +160,9 @@ const Courses: React.FC = () => {
       setError("Kursni o‘chirishda xatolik yuz berdi");
     }
   };
+  
 
-  if (!token) return <Login onLogin={handleLogin} />;
+//   if (!token) return <Login onLogin={handleLogin} />;
   if (loading) return <div className="text-center mt-10 text-gray-500">Yuklanmoqda...</div>;
   if (error) return <div className="text-center mt-10 text-red-500">{error}</div>;
 
@@ -276,7 +269,6 @@ const Courses: React.FC = () => {
               />
               <div className="flex justify-end gap-2">
                 <Button
-                  type="submit"
                 >
                   {editCourse ? "Yangilash" : "Qo‘shish"}
                 </Button>

@@ -68,7 +68,7 @@ const stats = [
 ];
 
 export default function Dashboard() {
-  const [search, setSearch] = useState("");
+  const [] = useState("");
 
   return (
     <div className="space-y-6">

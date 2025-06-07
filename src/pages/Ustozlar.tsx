@@ -199,7 +199,7 @@ const TeachersPage: React.FC = () => {
                             <div className="flex justify-end space-x-2">
                                 <div className="flex items-center gap-5">
                                     <button type="submit">Qo‘shish</button>
-                                    <button variant="outline" onClick={() => setIsOpen(false)}>Bekor qilish</button>
+                                    <button onClick={() => setIsOpen(false)}>Bekor qilish</button>
                                 </div>
                             </div>
                         </form>

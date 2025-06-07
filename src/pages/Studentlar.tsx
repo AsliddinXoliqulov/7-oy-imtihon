@@ -99,7 +99,7 @@ export default function Students() {
               ))
             ) : (
               <tr>
-                <td colSpan="3" className="text-center py-6 text-gray-500">
+                <td className="text-center py-6 text-gray-500">
                   Hech qanday talabalar topilmadi.
                 </td>
               </tr>
