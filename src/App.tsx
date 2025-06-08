@@ -24,7 +24,7 @@ function PrivateRoute({ children }: { children: React.ReactNode }) {
 function AppRoutes() {
   return (
     <Routes>
-      <Route path="/login" element={<Login />} />
+      <Route path="/sozlamalar" element={<Sozlamalar />} />
 
       <Route element={<PrivateRoute><Layout /></PrivateRoute>}>
         <Route path="/asosiy" element={<Asosiy />} />
