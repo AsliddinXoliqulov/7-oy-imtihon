@@ -31,7 +31,7 @@ export default function Login() {
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <form onSubmit={handleSubmit} className="bg-white p-6 rounded-lg shadow-md w-96">
         <h2 className="text-xl font-bold mb-4 text-center">Tizimga kirish 👋</h2>
-        <p className='pb-5 text-center'>Kirish uchun email va parolni kiriting</p>
+        <p className='pb-5 text-center'>Kirish uchun email hamda parolni kiriting</p>
         {error && <p className="text-red-500">{error}</p>}
         <input
           type="email"
@@ -49,7 +49,7 @@ export default function Login() {
           onChange={(e) => setPassword(e.target.value)}
           required
         />
-        <Button type="primary" htmlType="submit" className="w-full" loading={loading}>
+        <Button  htmlType="submit" className="w-full" loading={loading}>
           Kirish
         </Button>
       </form>
