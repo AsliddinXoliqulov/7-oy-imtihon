@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import API from "../api"; // kerakli path bo‘yicha import qiling
+
 interface Manager {
   _id: string;
   first_name: string;
@@ -21,17 +23,13 @@ const ManagersPage = () => {
     const userString = localStorage.getItem("user");
     const token = userString ? JSON.parse(userString).token : null;
 
-    fetch(`${import.meta.env.VITE_API_BASE_URL}/api/staff/all-admins`, {
+    API.get("/api/staff/all-admins", {
       headers: {
         Authorization: token ? `Bearer ${token}` : "",
       },
     })
       .then(res => {
-        if (!res.ok) throw new Error("Xatolik yuz berdi");
-        return res.json();
-      })
-      .then(data => {
-        setManagers(data.data || []);
+        setManagers(res.data.data || []);
       })
       .catch(err => {
         console.error(err);
@@ -89,7 +87,7 @@ const ManagersPage = () => {
               {filteredManagers.length === 0 ? (
                 <tr>
                   <td colSpan={6} className="p-4 text-center text-gray-500">
-                    Manager topilmadi
+                    Admin topilmadi
                   </td>
                 </tr>
               ) : (

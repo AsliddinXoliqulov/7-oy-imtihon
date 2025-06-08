@@ -8,7 +8,6 @@ import {
   FaSnowflake,
 } from "react-icons/fa";
 import { Button } from "antd";
-// import Login from "./Login";
 
 interface Course {
   _id: string;
@@ -55,7 +54,9 @@ const Courses: React.FC = () => {
   });
   const [editCourse, setEditCourse] = useState<Course | null>(null);
   const [token, setToken] = useState<string | null>(null);
-  const API = import.meta.env.VITE_API_BASE_URL;
+
+  // API base URL to'g'ridan-to'g'ri shu yerda
+  const API = "https://admin-crm.onrender.com";
 
   useEffect(() => {
     const userData = localStorage.getItem("user");
@@ -75,6 +76,7 @@ const Courses: React.FC = () => {
         headers: { Authorization: `Bearer ${token}` },
       });
       setCourses(res.data.data || []);
+      setError(null);
     } catch (err) {
       setError("Kurslarni olishda xatolik yuz berdi");
     } finally {
@@ -92,6 +94,7 @@ const Courses: React.FC = () => {
       fetchCourses();
       setShowModal(false);
       setNewCourse({ name: "", price: 0, duration: "", description: "" });
+      setError(null);
     } catch (err) {
       setError("Kurs yaratishda xatolik yuz berdi");
     }
@@ -126,6 +129,7 @@ const Courses: React.FC = () => {
       setEditCourse(null);
       setShowModal(false);
       setNewCourse({ name: "", price: 0, duration: "", description: "" });
+      setError(null);
     } catch (err) {
       setError("Kursni yangilashda xatolik yuz berdi");
     }
@@ -143,6 +147,7 @@ const Courses: React.FC = () => {
         { headers: { Authorization: `Bearer ${token}` } }
       );
       fetchCourses();
+      setError(null);
     } catch (err) {
       setError("Muzlatish funksiyasida xatolik yuz berdi");
     }
@@ -156,15 +161,20 @@ const Courses: React.FC = () => {
         data: { course_id: courseId },
       });
       fetchCourses();
+      setError(null);
     } catch (err) {
       setError("Kursni o‘chirishda xatolik yuz berdi");
     }
   };
-  
 
-//   if (!token) return <Login onLogin={handleLogin} />;
-  if (loading) return <div className="text-center mt-10 text-gray-500">Yuklanmoqda...</div>;
-  if (error) return <div className="text-center mt-10 text-red-500">{error}</div>;
+  if (loading)
+    return (
+      <div className="text-center mt-10 text-gray-500">Yuklanmoqda...</div>
+    );
+  if (error)
+    return (
+      <div className="text-center mt-10 text-red-500">{error}</div>
+    );
 
   return (
     <div className="p-6">
@@ -181,10 +191,13 @@ const Courses: React.FC = () => {
           <FaPlus /> Kurs Qo‘shish
         </Button>
       </div>
- 
+
       <div className="flex gap-3 flex-wrap justify-around">
         {courses.map((course) => (
-          <div key={course._id} className="bg-white p-4 rounded-lg shadow-md xl:w-96 w-full">
+          <div
+            key={course._id}
+            className="bg-white p-4 rounded-lg shadow-md xl:w-96 w-full"
+          >
             <div className="flex justify-between items-center mb-1">
               <h2 className="text-lg font-semibold">{course.name.name}</h2>
               <span className="text-gray-600">
@@ -222,7 +235,7 @@ const Courses: React.FC = () => {
       </div>
 
       {showModal && (
-        <div className="fixed inset-0  bg-opacity-50 flex items-center justify-center z-50">
+        <div className="fixed inset-0 bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
             <h2 className="text-xl font-semibold mb-4">
               {editCourse ? "Kursni Tahrirlash" : "Yangi Kurs Qo‘shish"}
@@ -235,7 +248,9 @@ const Courses: React.FC = () => {
                 type="text"
                 placeholder="Kurs Nomi"
                 value={newCourse.name}
-                onChange={(e) => setNewCourse({ ...newCourse, name: e.target.value })}
+                onChange={(e) =>
+                  setNewCourse({ ...newCourse, name: e.target.value })
+                }
                 className="border p-2 rounded"
                 required
               />
@@ -253,7 +268,9 @@ const Courses: React.FC = () => {
                 type="text"
                 placeholder="Davomiyligi"
                 value={newCourse.duration}
-                onChange={(e) => setNewCourse({ ...newCourse, duration: e.target.value })}
+                onChange={(e) =>
+                  setNewCourse({ ...newCourse, duration: e.target.value })
+                }
                 className="border p-2 rounded"
                 required
               />
@@ -268,8 +285,7 @@ const Courses: React.FC = () => {
                 required
               />
               <div className="flex justify-end gap-2">
-                <Button
-                >
+                <Button type="submit">
                   {editCourse ? "Yangilash" : "Qo‘shish"}
                 </Button>
                 <button
