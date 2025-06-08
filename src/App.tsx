@@ -12,6 +12,7 @@ import Kurslar from './pages/Kurslar';
 import Payment from './pages/Payment';
 import Sozlamalar from './pages/Sozlamalar';
 import Profile from './pages/Profile';
+// import Logout from './pages/Logout';
 
 import Layout from './components/Layout/Layout';
 
@@ -23,7 +24,7 @@ function PrivateRoute({ children }: { children: React.ReactNode }) {
 function AppRoutes() {
   return (
     <Routes>
-      <Route path="/sozlamalar" element={<Sozlamalar />} />
+      <Route path="/login" element={<Login />} />
 
       <Route element={<PrivateRoute><Layout /></PrivateRoute>}>
         <Route path="/asosiy" element={<Asosiy />} />
